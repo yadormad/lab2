@@ -1,16 +1,17 @@
 package com.mag.lab2.service.impl;
 
-import com.mag.lab2.entity.ClientTableEntity;
-import com.mag.lab2.entity.MachinistTableEntity;
-import com.mag.lab2.entity.OrderStatusTableEntity;
-import com.mag.lab2.entity.OrderTableEntity;
-import com.mag.lab2.model.Order;
-import com.mag.lab2.model.OrderStatus;
+import com.mag.lab2.model.entity.ClientTableEntity;
+import com.mag.lab2.model.entity.MachinistTableEntity;
+import com.mag.lab2.model.entity.OrderStatusTableEntity;
+import com.mag.lab2.model.entity.OrderTableEntity;
+import com.mag.lab2.model.dto.Order;
+import com.mag.lab2.model.dto.OrderStatus;
 import com.mag.lab2.repository.ClientRepository;
 import com.mag.lab2.repository.MachinistRepository;
 import com.mag.lab2.repository.OrderRepository;
 import com.mag.lab2.repository.OrderStatusRepository;
 import com.mag.lab2.service.OrderService;
+import com.mag.lab2.service.exception.DateOrderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order addOrder(Order order) {
+    public Order addOrder(Order order) throws DateOrderException {
+        if(order.getStartDate().after(order.getEndDate())) throw new DateOrderException("End date is before start date");
         OrderTableEntity orderEntity = new OrderTableEntity();
         orderEntity.toEntity(order);
         importRelations(orderEntity, order);
@@ -49,7 +51,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order editOrder(Order order) {
+    public Order editOrder(Order order) throws DateOrderException {
+        if(order.getStartDate().after(order.getEndDate())) throw new DateOrderException("End date is before start date");
         OrderTableEntity orderEntity = orderRepository.getOne(order.getId());
         orderEntity.toEntity(order);
         importRelations(orderEntity, order);

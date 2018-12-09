@@ -1,7 +1,7 @@
-package com.mag.lab2.entity;
+package com.mag.lab2.model.entity;
 
-import com.mag.lab2.model.Client;
-import com.mag.lab2.model.Order;
+import com.mag.lab2.model.dto.Machinist;
+import com.mag.lab2.model.dto.Order;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -9,13 +9,13 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "CLIENT_TABLE", schema = "PUBLIC")
-public class ClientTableEntity {
+@Table(name = "MACHINIST_TABLE", schema = "PUBLIC")
+public class MachinistTableEntity {
     private long id;
     private String firstname;
     private String lastname;
     private String fathername;
-    private String phone;
+    private double hourCost;
     private Set<OrderTableEntity> orderEntitySet;
 
     @OneToMany(mappedBy = "orderStatusEntity")
@@ -69,60 +69,61 @@ public class ClientTableEntity {
     }
 
     @Basic
-    @Column(name = "PHONE")
-    public String getPhone() {
-        return phone;
+    @Column(name = "HOUR_COST")
+    public double getHourCost() {
+        return hourCost;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setHourCost(double hourCost) {
+        this.hourCost = hourCost;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ClientTableEntity that = (ClientTableEntity) o;
+        MachinistTableEntity that = (MachinistTableEntity) o;
         return id == that.id &&
+                Double.compare(that.hourCost, hourCost) == 0 &&
                 Objects.equals(firstname, that.firstname) &&
                 Objects.equals(lastname, that.lastname) &&
-                Objects.equals(fathername, that.fathername) &&
-                Objects.equals(phone, that.phone);
+                Objects.equals(fathername, that.fathername);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstname, lastname, fathername, phone);
+
+        return Objects.hash(id, firstname, lastname, fathername, hourCost);
     }
 
-    public Client toModel() {
-        return new Client(id, firstname, lastname, fathername, phone);
+    public Machinist toModel() {
+        return new Machinist(id, firstname, lastname, fathername, hourCost);
     }
 
-    public ClientTableEntity toEntity(Client model) {
+    public MachinistTableEntity toEntity(Machinist model) {
         if(model.getId() != null) {
             this.id = model.getId();
         }
         this.firstname = model.getFirstName();
         this.lastname = model.getLastName();
         this.fathername = model.getFatherName();
-        this.phone = model.getPhoneNumber();
+        this.hourCost = model.getValueCost();
         return this;
     }
 
-    public Client exportOrders(Client model) {
-        Set<Order> clientOrders = new HashSet<>();
-        for(OrderTableEntity clientOrderEntity: orderEntitySet) {
-            clientOrders.add(clientOrderEntity.toModel());
+    public Machinist exportOrders(Machinist model) {
+        Set<Order> machinistOrders = new HashSet<>();
+        for(OrderTableEntity machinistOrderEntity: orderEntitySet) {
+            machinistOrders.add(machinistOrderEntity.toModel());
         }
-        model.setClientOrders(clientOrders);
+        model.setMachinistOrders(machinistOrders);
         return model;
     }
 
-    public void importOrders(Client model) {
+    public void importOrders(Machinist model) {
         orderEntitySet = new HashSet<>();
-        for(Order clientOrderModel: model.getClientOrders()) {
-            orderEntitySet.add(new OrderTableEntity().toEntity(clientOrderModel));
+        for(Order machinistOrderModel: model.getMachinistOrders()) {
+            orderEntitySet.add(new OrderTableEntity().toEntity(machinistOrderModel));
         }
     }
 }

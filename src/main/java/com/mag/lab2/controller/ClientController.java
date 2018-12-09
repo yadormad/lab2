@@ -1,6 +1,6 @@
 package com.mag.lab2.controller;
 
-import com.mag.lab2.model.Client;
+import com.mag.lab2.model.dto.Client;
 import com.mag.lab2.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,21 +26,26 @@ public class ClientController {
         return "clients";
     }
 
+    @GetMapping("/")
+    public String defaultRedirect(Model model) {
+        return getAllClients(model);
+    }
+
     @RequestMapping(value="/clients/edit", method=RequestMethod.POST)
     public String editClient(@ModelAttribute Client client) {
         clientService.editClient(client);
-        return "redirect:/clients";
+        return "redirect:/index";
     }
 
     @RequestMapping(value="/clients/add", method=RequestMethod.POST)
     public String addClient(@ModelAttribute Client client) {
         clientService.addClient(client);
-        return "redirect:/clients";
+        return "redirect:/index";
     }
 
     @RequestMapping(value="/clients/delete", method=RequestMethod.POST)
     public String deleteClient(@ModelAttribute Client client) {
         clientService.delete(client.getId());
-        return "redirect:/clients";
+        return "redirect:/index";
     }
 }

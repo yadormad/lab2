@@ -50,8 +50,8 @@ public class MvcConfig implements WebMvcConfigurer {
         return viewResolver;
     }
 
-    @Override
+    /*@Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("clients");
-    }
+        registry.addViewController("index").setViewName("clients");
+    }*/
 }

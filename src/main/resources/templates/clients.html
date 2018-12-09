@@ -11,7 +11,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/clients">Petrovich Pit Stop</a>
+    <a class="navbar-brand" href="/">Petrovich Pit Stop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -35,17 +35,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--/*@thymesVar id="client" type="com.mag.lab2.model.Client"*/-->
+            <!--/*@thymesVar id="client" type="com.mag.lab2.model.dto.Client"*/-->
             <form action="#" method="post" th:action="@{/clients/edit}" th:object="${client}">
                 <div class="modal-body">
                     <input type="number" hidden id="editId" th:field="*{id}">
                     <div class="form-group">
                         <label for="firstNameEdit">First Name</label>
-                        <input type="text" class="form-control" id="firstNameEdit" placeholder="First Name" th:field="*{firstName}">
+                        <input type="text" class="form-control mandatory" id="firstNameEdit" placeholder="First Name" th:field="*{firstName}">
                     </div>
                     <div class="form-group">
                         <label for="lastNameEdit">Last Name</label>
-                        <input type="text" class="form-control" id="lastNameEdit" placeholder="Last Name" th:field="*{lastName}">
+                        <input type="text" class="form-control mandatory" id="lastNameEdit" placeholder="Last Name" th:field="*{lastName}">
                     </div>
                     <div class="form-group">
                         <label for="fatherNameEdit">Father Name</label>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary" id="editSave">Save changes</button>
                 </div>
             </form>
         </div>
@@ -75,16 +75,16 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--/*@thymesVar id="client" type="com.mag.lab2.model.Client"*/-->
+            <!--/*@thymesVar id="client" type="com.mag.lab2.model.dto.Client"*/-->
             <form action="#" method="post" th:action="@{/clients/add}" th:object="${client}">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="firstNameAdd">First Name</label>
-                        <input type="text" class="form-control" id="firstNameAdd" placeholder="First Name" th:field="*{firstName}">
+                        <input type="text" class="form-control mandatory" id="firstNameAdd" placeholder="First Name" th:field="*{firstName}">
                     </div>
                     <div class="form-group">
                         <label for="lastNameAdd">Last Name</label>
-                        <input type="text" class="form-control" id="lastNameAdd" placeholder="Last Name" th:field="*{lastName}">
+                        <input type="text" class="form-control mandatory" id="lastNameAdd" placeholder="Last Name" th:field="*{lastName}">
                     </div>
                     <div class="form-group">
                         <label for="fatherNameAdd">Father Name</label>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary" id="addSave">Save changes</button>
                 </div>
             </form>
         </div>

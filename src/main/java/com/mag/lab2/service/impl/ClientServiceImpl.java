@@ -1,7 +1,7 @@
 package com.mag.lab2.service.impl;
 
-import com.mag.lab2.entity.ClientTableEntity;
-import com.mag.lab2.model.Client;
+import com.mag.lab2.model.entity.ClientTableEntity;
+import com.mag.lab2.model.dto.Client;
 import com.mag.lab2.repository.ClientRepository;
 import com.mag.lab2.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,4 +49,6 @@ public class ClientServiceImpl implements ClientService {
         }
         return allClients;
     }
+
+
 }

@@ -1,6 +1,6 @@
 package com.mag.lab2.controller;
 
-import com.mag.lab2.model.Machinist;
+import com.mag.lab2.model.dto.Machinist;
 import com.mag.lab2.service.MachinistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

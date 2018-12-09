@@ -1,4 +1,4 @@
-package com.mag.lab2.model;
+package com.mag.lab2.model.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

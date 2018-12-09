@@ -1,6 +1,6 @@
 package com.mag.lab2.service;
 
-import com.mag.lab2.model.Machinist;
+import com.mag.lab2.model.dto.Machinist;
 
 import java.util.List;
 

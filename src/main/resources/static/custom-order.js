@@ -73,8 +73,8 @@ function setOrderFields() {
     $("#statusEditSelect").val(
         $("#" + statusEditPrefix + statusId).val()
     );
-    /*$("#clientHiddenId").val(clientId);
-    $("#machinistHiddenId").val(machinistId);
-    $("#statusHiddenId").val(statusId);*/
+    $(".mandatory").each(function () {
+        validateMandatory(this);
+    });
 }
 

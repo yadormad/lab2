@@ -1,6 +1,6 @@
-package com.mag.lab2.entity;
+package com.mag.lab2.model.entity;
 
-import com.mag.lab2.model.Order;
+import com.mag.lab2.model.dto.Order;
 
 import javax.persistence.*;
 import java.sql.Date;

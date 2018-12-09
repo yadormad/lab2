@@ -15,4 +15,7 @@ function setMachinistFields() {
     $("#lastNameEdit").get(0).value = activeRow.children()[1].innerText;
     $("#fatherNameEdit").get(0).value = activeRow.children()[2].innerText;
     $("#valueCostEdit").get(0).value = activeRow.children()[3].innerText;
+    $(".mandatory").each(function () {
+        validateMandatory(this);
+    });
 }

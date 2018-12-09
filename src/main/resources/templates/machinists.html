@@ -11,7 +11,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/clients">Petrovich Pit Stop</a>
+    <a class="navbar-brand" href="/">Petrovich Pit Stop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -35,17 +35,17 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--/*@thymesVar id="machinist" type="com.mag.lab2.model.Machinist"*/-->
+            <!--/*@thymesVar id="machinist" type="com.mag.lab2.model.dto.Machinist"*/-->
             <form action="#" method="post" th:action="@{/machinists/edit}" th:object="${machinist}">
                 <div class="modal-body">
                     <input type="number" hidden id="editId" th:field="*{id}">
                     <div class="form-group">
                         <label for="firstNameEdit">First Name</label>
-                        <input type="text" class="form-control" id="firstNameEdit" placeholder="First Name" th:field="*{firstName}">
+                        <input type="text" class="form-control mandatory" id="firstNameEdit" placeholder="First Name" th:field="*{firstName}">
                     </div>
                     <div class="form-group">
                         <label for="lastNameEdit">Last Name</label>
-                        <input type="text" class="form-control" id="lastNameEdit" placeholder="Last Name" th:field="*{lastName}">
+                        <input type="text" class="form-control mandatory" id="lastNameEdit" placeholder="Last Name" th:field="*{lastName}">
                     </div>
                     <div class="form-group">
                         <label for="fatherNameEdit">Father Name</label>
@@ -53,12 +53,12 @@
                     </div>
                     <div class="form-group">
                         <label for="valueCostEdit">Value Cost</label>
-                        <input type="number" class="form-control" id="valueCostEdit" placeholder="Value Cost" th:field="*{valueCost}">
+                        <input type="number" class="form-control mandatory" id="valueCostEdit" placeholder="Value Cost" th:field="*{valueCost}">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary" id="editSave">Save changes</button>
                 </div>
             </form>
         </div>
@@ -75,16 +75,16 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <!--/*@thymesVar id="machinist" type="com.mag.lab2.model.Machinist"*/-->
+            <!--/*@thymesVar id="machinist" type="com.mag.lab2.model.dto.Machinist"*/-->
             <form action="#" method="post" th:action="@{/machinists/add}" th:object="${machinist}">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="firstNameAdd">First Name</label>
-                        <input type="text" class="form-control" id="firstNameAdd" placeholder="First Name" th:field="*{firstName}">
+                        <input type="text" class="form-control mandatory" id="firstNameAdd" placeholder="First Name" th:field="*{firstName}">
                     </div>
                     <div class="form-group">
                         <label for="lastNameAdd">Last Name</label>
-                        <input type="text" class="form-control" id="lastNameAdd" placeholder="Last Name" th:field="*{lastName}">
+                        <input type="text" class="form-control mandatory" id="lastNameAdd" placeholder="Last Name" th:field="*{lastName}">
                     </div>
                     <div class="form-group">
                         <label for="fatherNameAdd">Father Name</label>
@@ -92,12 +92,12 @@
                     </div>
                     <div class="form-group">
                         <label for="valueCostAdd">Value Cost</label>
-                        <input type="text" class="form-control" id="valueCostAdd" placeholder="Value Cost" th:field="*{valueCost}">
+                        <input type="text" class="form-control mandatory" id="valueCostAdd" placeholder="Value Cost" th:field="*{valueCost}">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary" id="addSave">Save changes</button>
                 </div>
             </form>
         </div>
@@ -114,7 +114,7 @@
             </div>
         </div>
     </div>
-    <!--/*@thymesVar id="machinist" type="com.mag.lab2.model.Machinist"*/-->
+    <!--/*@thymesVar id="machinist" type="com.mag.lab2.model.dto.Machinist"*/-->
     <form hidden th:action="@{/machinists/delete}" th:object="${machinist}" method="post">
         <input type="number" hidden id="deleteId" th:field="*{id}">
         <button type="submit" id="deleteFormBtn">D</button>

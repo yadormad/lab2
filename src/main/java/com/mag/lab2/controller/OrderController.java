@@ -1,9 +1,10 @@
 package com.mag.lab2.controller;
 
-import com.mag.lab2.model.Order;
+import com.mag.lab2.model.dto.Order;
 import com.mag.lab2.service.ClientService;
 import com.mag.lab2.service.MachinistService;
 import com.mag.lab2.service.OrderService;
+import com.mag.lab2.service.exception.DateOrderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,13 +37,13 @@ public class OrderController {
     }
 
     @RequestMapping(value="/orders/edit", method= RequestMethod.POST)
-    public String editOrder(@ModelAttribute Order order) {
+    public String editOrder(@ModelAttribute Order order) throws DateOrderException {
         orderService.editOrder(order);
         return "redirect:/orders";
     }
 
     @RequestMapping(value="/orders/add", method=RequestMethod.POST)
-    public String addOrder(@ModelAttribute Order order) {
+    public String addOrder(@ModelAttribute Order order) throws DateOrderException {
         orderService.addOrder(order);
         return "redirect:/orders";
     }

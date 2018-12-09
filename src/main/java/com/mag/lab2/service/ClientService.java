@@ -1,6 +1,6 @@
 package com.mag.lab2.service;
 
-import com.mag.lab2.model.Client;
+import com.mag.lab2.model.dto.Client;
 
 import java.util.List;
 

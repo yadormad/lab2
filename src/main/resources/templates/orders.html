@@ -11,7 +11,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/clients">Petrovich Pit Stop</a>
+    <a class="navbar-brand" href="/">Petrovich Pit Stop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -45,31 +45,31 @@
                     </div>
                     <div class="form-group">
                         <label for="clientEditSelect">Client</label>
-                        <select class="form-control" id="clientEditSelect">
+                        <select class="form-control mandatory" id="clientEditSelect">
                             <option th:each="client : ${clientsList}" th:id="${'editClient_' + client.id}" th:text="${client.firstName} +' ' + ${client.lastName}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="machinistEditSelect">Machinist</label>
-                        <select class="form-control" id="machinistEditSelect">
+                        <select class="form-control mandatory" id="machinistEditSelect">
                             <option th:each="machinist : ${machinistList}" th:id="${'editMachinist_' + machinist.id}" th:text="${machinist.firstName} + ' ' + ${machinist.lastName}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="startDateEdit">Start date</label>
-                        <input type="date" class="form-control" id="startDateEdit" placeholder="Start date" th:field="*{startDate}">
+                        <input type="date" class="form-control mandatory" id="startDateEdit" placeholder="Start date" th:field="*{startDate}">
                     </div>
                     <div class="form-group">
                         <label for="endDateEdit">End date</label>
-                        <input type="date" class="form-control" id="endDateEdit" placeholder="End date" th:field="*{endDate}">
+                        <input type="date" class="form-control mandatory" id="endDateEdit" placeholder="End date" th:field="*{endDate}">
                     </div>
                     <div class="form-group">
                         <label for="valueCostEdit">Cost</label>
-                        <input type="number" class="form-control" id="valueCostEdit" placeholder="Value Cost" th:field="*{cost}">
+                        <input type="number" class="form-control mandatory" id="valueCostEdit" placeholder="Value Cost" th:field="*{cost}">
                     </div>
                     <div class="form-group">
                         <label for="statusEditSelect">Status</label>
-                        <select class="form-control" id="statusEditSelect">
+                        <select class="form-control mandatory" id="statusEditSelect">
                             <option th:each="status : ${statusList}" th:id="${'editStatus_' + status.id}" th:text="${status.status}"></option>
                         </select>
                     </div>
@@ -81,7 +81,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary" id="editSave">Save changes</button>
                 </div>
             </form>
         </div>
@@ -107,31 +107,31 @@
                     </div>
                     <div class="form-group">
                         <label for="clientAddSelect">Client</label>
-                        <select class="form-control" id="clientAddSelect">
+                        <select class="form-control mandatory" id="clientAddSelect">
                             <option th:each="client : ${clientsList}" th:id="${'addClient_' + client.id}" th:text="${client.firstName} +' ' + ${client.lastName}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="machinistAddSelect">Machinist</label>
-                        <select class="form-control" id="machinistAddSelect">
+                        <select class="form-control mandatory" id="machinistAddSelect">
                             <option th:each="machinist : ${machinistList}" th:id="${'addMachinist_' + machinist.id}" th:text="${machinist.firstName} + ' ' + ${machinist.lastName}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="startDateAdd">Start date</label>
-                        <input type="date" class="form-control" id="startDateAdd" placeholder="Start date" th:field="*{startDate}">
+                        <input type="date" class="form-control mandatory" id="startDateAdd" placeholder="Start date" th:field="*{startDate}">
                     </div>
                     <div class="form-group">
                         <label for="endDateAdd">End date</label>
-                        <input type="date" class="form-control" id="endDateAdd" placeholder="End date" th:field="*{endDate}">
+                        <input type="date" class="form-control mandatory" id="endDateAdd" placeholder="End date" th:field="*{endDate}">
                     </div>
                     <div class="form-group">
                         <label for="valueCostAdd">Cost</label>
-                        <input type="number" class="form-control" id="valueCostAdd" placeholder="Value Cost" th:field="*{cost}">
+                        <input type="number" class="form-control mandatory" id="valueCostAdd" placeholder="Value Cost" th:field="*{cost}">
                     </div>
                     <div class="form-group">
                         <label for="statusAddSelect">Status</label>
-                        <select class="form-control" id="statusAddSelect">
+                        <select class="form-control mandatory" id="statusAddSelect">
                             <option th:each="status : ${statusList}" th:id="${'addStatus_' + status.id}" th:text="${status.status}"></option>
                         </select>
                     </div>
@@ -143,7 +143,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary" id="addSave">Save changes</button>
                 </div>
             </form>
         </div>
@@ -160,7 +160,7 @@
             </div>
         </div>
     </div>
-    <!--/*@thymesVar id="machinist" type="com.mag.lab2.model.Machinist"*/-->
+    <!--/*@thymesVar id="machinist" type="com.mag.lab2.model.dto.Machinist"*/-->
     <form hidden th:action="@{/orders/delete}" th:object="${order}" method="post">
         <input type="number" hidden id="deleteId" th:field="*{id}">
         <button type="submit" id="deleteFormBtn">D</button>

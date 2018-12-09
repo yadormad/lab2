@@ -1,7 +1,7 @@
 package com.mag.lab2.service.impl;
 
-import com.mag.lab2.entity.MachinistTableEntity;
-import com.mag.lab2.model.Machinist;
+import com.mag.lab2.model.entity.MachinistTableEntity;
+import com.mag.lab2.model.dto.Machinist;
 import com.mag.lab2.repository.MachinistRepository;
 import com.mag.lab2.service.MachinistService;
 import org.springframework.beans.factory.annotation.Autowired;

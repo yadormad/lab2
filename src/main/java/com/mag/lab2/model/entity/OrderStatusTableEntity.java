@@ -1,6 +1,6 @@
-package com.mag.lab2.entity;
+package com.mag.lab2.model.entity;
 
-import com.mag.lab2.model.OrderStatus;
+import com.mag.lab2.model.dto.OrderStatus;
 
 import javax.persistence.*;
 import java.util.Objects;
