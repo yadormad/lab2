@@ -34,18 +34,18 @@ public class ClientController {
     @RequestMapping(value="/clients/edit", method=RequestMethod.POST)
     public String editClient(@ModelAttribute Client client) {
         clientService.editClient(client);
-        return "redirect:/index";
+        return "redirect:/clients";
     }
 
     @RequestMapping(value="/clients/add", method=RequestMethod.POST)
     public String addClient(@ModelAttribute Client client) {
         clientService.addClient(client);
-        return "redirect:/index";
+        return "redirect:/clients";
     }
 
     @RequestMapping(value="/clients/delete", method=RequestMethod.POST)
     public String deleteClient(@ModelAttribute Client client) {
         clientService.delete(client.getId());
-        return "redirect:/index";
+        return "redirect:/clients";
     }
 }

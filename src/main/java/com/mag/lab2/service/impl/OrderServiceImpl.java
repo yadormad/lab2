@@ -1,7 +1,5 @@
 package com.mag.lab2.service.impl;
 
-import com.mag.lab2.model.entity.ClientTableEntity;
-import com.mag.lab2.model.entity.MachinistTableEntity;
 import com.mag.lab2.model.entity.OrderStatusTableEntity;
 import com.mag.lab2.model.entity.OrderTableEntity;
 import com.mag.lab2.model.dto.Order;
@@ -11,38 +9,35 @@ import com.mag.lab2.repository.MachinistRepository;
 import com.mag.lab2.repository.OrderRepository;
 import com.mag.lab2.repository.OrderStatusRepository;
 import com.mag.lab2.service.OrderService;
+import com.mag.lab2.service.converter.Converter;
+import com.mag.lab2.service.converter.impl.OrderJPAConverterImpl;
 import com.mag.lab2.service.exception.DateOrderException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
-    private final ClientRepository clientRepository;
-    private final MachinistRepository machinistRepository;
     private final OrderStatusRepository orderStatusRepository;
+    private Converter<OrderTableEntity, Order> orderConverter;
 
     @Autowired
     public OrderServiceImpl(OrderRepository orderRepository, ClientRepository clientRepository, MachinistRepository machinistRepository, OrderStatusRepository orderStatusRepository) {
         this.orderRepository = orderRepository;
-        this.clientRepository = clientRepository;
-        this.machinistRepository = machinistRepository;
         this.orderStatusRepository = orderStatusRepository;
+        this.orderConverter = new OrderJPAConverterImpl(orderRepository, clientRepository, machinistRepository, orderStatusRepository);
     }
 
     @Override
     public Order addOrder(Order order) throws DateOrderException {
         if(order.getStartDate().after(order.getEndDate())) throw new DateOrderException("End date is before start date");
-        OrderTableEntity orderEntity = new OrderTableEntity();
-        orderEntity.toEntity(order);
-        importRelations(orderEntity, order);
+        OrderTableEntity orderEntity = orderConverter.toEntity(order);
         orderRepository.saveAndFlush(orderEntity);
-        return orderEntity.toModel();
+        return orderConverter.toDto(orderEntity);
     }
 
     @Override
@@ -53,18 +48,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order editOrder(Order order) throws DateOrderException {
         if(order.getStartDate().after(order.getEndDate())) throw new DateOrderException("End date is before start date");
-        OrderTableEntity orderEntity = orderRepository.getOne(order.getId());
-        orderEntity.toEntity(order);
-        importRelations(orderEntity, order);
-        orderRepository.saveAndFlush(orderEntity);
-        return orderEntity.toModel();
+        orderRepository.saveAndFlush(orderConverter.toEntity(order));
+        return order;
     }
 
     @Override
     public List<Order> getAll() {
         List<Order> allOrders = new ArrayList<>();
         for(OrderTableEntity orderEntity: orderRepository.findAll()) {
-            allOrders.add(orderEntity.exportRelations(orderEntity.toModel()));
+            allOrders.add(orderConverter.toDto(orderEntity));
         }
         return allOrders;
     }
@@ -73,17 +65,8 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderStatus> getAllStatuses() {
         List<OrderStatus> orderStatuses = new ArrayList<>();
         for(OrderStatusTableEntity orderStatusTableEntity: orderStatusRepository.findAll()) {
-            orderStatuses.add(orderStatusTableEntity.toModel());
+            orderStatuses.add(new OrderStatus(orderStatusTableEntity.getId(), orderStatusTableEntity.getStatus()));
         }
         return orderStatuses;
-    }
-
-    private void importRelations(OrderTableEntity orderEntity, Order orderModel) {
-        Optional<ClientTableEntity> clientEntityOptional = clientRepository.findById(orderModel.getClient().getId());
-        Optional<MachinistTableEntity> machinistEntityOptional = machinistRepository.findById(orderModel.getMachinist().getId());
-        Optional<OrderStatusTableEntity> orderStatusEntityOptional = orderStatusRepository.findById(orderModel.getStatus().getId());
-        clientEntityOptional.ifPresent(orderEntity::setClientEntity);
-        machinistEntityOptional.ifPresent(orderEntity::setMachinistEntity);
-        orderStatusEntityOptional.ifPresent(orderEntity::setOrderStatusEntity);
     }
 }

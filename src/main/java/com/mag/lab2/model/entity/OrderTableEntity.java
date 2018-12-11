@@ -1,7 +1,5 @@
 package com.mag.lab2.model.entity;
 
-import com.mag.lab2.model.dto.Order;
-
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
@@ -115,27 +113,5 @@ public class OrderTableEntity {
     public int hashCode() {
 
         return Objects.hash(id, description, startDate, endDate, fullCost);
-    }
-
-    public Order toModel() {
-        return new Order(id, description, startDate, endDate, fullCost);
-    }
-
-    public OrderTableEntity toEntity(Order model) {
-        if(model.getId() != null) {
-            this.id = model.getId();
-        }
-        this.description = model.getDescription();
-        this.startDate = new Date(model.getStartDate().getTime());
-        this.endDate = new Date(model.getEndDate().getTime());
-        this.fullCost = model.getCost();
-        return this;
-    }
-
-    public Order exportRelations(Order model) {
-        model.setClient(this.clientEntity.toModel());
-        model.setMachinist(this.machinistEntity.toModel());
-        model.setStatus(this.orderStatusEntity.toModel());
-        return model;
     }
 }

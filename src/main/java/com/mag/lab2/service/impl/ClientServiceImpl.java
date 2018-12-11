@@ -4,6 +4,8 @@ import com.mag.lab2.model.entity.ClientTableEntity;
 import com.mag.lab2.model.dto.Client;
 import com.mag.lab2.repository.ClientRepository;
 import com.mag.lab2.service.ClientService;
+import com.mag.lab2.service.converter.Converter;
+import com.mag.lab2.service.converter.impl.ClientJPAConverterImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +16,19 @@ import java.util.List;
 public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
+    private Converter<ClientTableEntity, Client> clientConverter;
 
     @Autowired
     public ClientServiceImpl(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
+        this.clientConverter = new ClientJPAConverterImpl(clientRepository);
     }
 
     @Override
     public Client addClient(Client client) {
-        ClientTableEntity clientEntity = new ClientTableEntity();
-        clientEntity.toEntity(client);
+        ClientTableEntity clientEntity = clientConverter.toEntity(client);
         clientRepository.saveAndFlush(clientEntity);
-        return clientEntity.toModel();
+        return clientConverter.toDto(clientEntity);
     }
 
     @Override
@@ -35,17 +38,15 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client editClient(Client client) {
-        ClientTableEntity clientEntity = clientRepository.getOne(client.getId());
-        clientEntity.toEntity(client);
-        clientRepository.saveAndFlush(clientEntity);
-        return clientEntity.toModel();
+        clientRepository.saveAndFlush(clientConverter.toEntity(client));
+        return client;
     }
 
     @Override
     public List<Client> getAll() {
         List<Client> allClients = new ArrayList<>();
         for(ClientTableEntity clientEntity: clientRepository.findAll()) {
-            allClients.add(clientEntity.exportOrders(clientEntity.toModel()));
+            allClients.add(clientConverter.toDto(clientEntity));
         }
         return allClients;
     }

@@ -1,10 +1,6 @@
 package com.mag.lab2.model.entity;
 
-import com.mag.lab2.model.dto.Machinist;
-import com.mag.lab2.model.dto.Order;
-
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -94,36 +90,5 @@ public class MachinistTableEntity {
     public int hashCode() {
 
         return Objects.hash(id, firstname, lastname, fathername, hourCost);
-    }
-
-    public Machinist toModel() {
-        return new Machinist(id, firstname, lastname, fathername, hourCost);
-    }
-
-    public MachinistTableEntity toEntity(Machinist model) {
-        if(model.getId() != null) {
-            this.id = model.getId();
-        }
-        this.firstname = model.getFirstName();
-        this.lastname = model.getLastName();
-        this.fathername = model.getFatherName();
-        this.hourCost = model.getValueCost();
-        return this;
-    }
-
-    public Machinist exportOrders(Machinist model) {
-        Set<Order> machinistOrders = new HashSet<>();
-        for(OrderTableEntity machinistOrderEntity: orderEntitySet) {
-            machinistOrders.add(machinistOrderEntity.toModel());
-        }
-        model.setMachinistOrders(machinistOrders);
-        return model;
-    }
-
-    public void importOrders(Machinist model) {
-        orderEntitySet = new HashSet<>();
-        for(Order machinistOrderModel: model.getMachinistOrders()) {
-            orderEntitySet.add(new OrderTableEntity().toEntity(machinistOrderModel));
-        }
     }
 }

@@ -1,10 +1,6 @@
 package com.mag.lab2.model.entity;
 
-import com.mag.lab2.model.dto.Client;
-import com.mag.lab2.model.dto.Order;
-
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -95,34 +91,4 @@ public class ClientTableEntity {
         return Objects.hash(id, firstname, lastname, fathername, phone);
     }
 
-    public Client toModel() {
-        return new Client(id, firstname, lastname, fathername, phone);
-    }
-
-    public ClientTableEntity toEntity(Client model) {
-        if(model.getId() != null) {
-            this.id = model.getId();
-        }
-        this.firstname = model.getFirstName();
-        this.lastname = model.getLastName();
-        this.fathername = model.getFatherName();
-        this.phone = model.getPhoneNumber();
-        return this;
-    }
-
-    public Client exportOrders(Client model) {
-        Set<Order> clientOrders = new HashSet<>();
-        for(OrderTableEntity clientOrderEntity: orderEntitySet) {
-            clientOrders.add(clientOrderEntity.toModel());
-        }
-        model.setClientOrders(clientOrders);
-        return model;
-    }
-
-    public void importOrders(Client model) {
-        orderEntitySet = new HashSet<>();
-        for(Order clientOrderModel: model.getClientOrders()) {
-            orderEntitySet.add(new OrderTableEntity().toEntity(clientOrderModel));
-        }
-    }
 }

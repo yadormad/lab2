@@ -108,12 +108,14 @@
                     <div class="form-group">
                         <label for="clientAddSelect">Client</label>
                         <select class="form-control mandatory" id="clientAddSelect">
+                            <option selected disabled></option>
                             <option th:each="client : ${clientsList}" th:id="${'addClient_' + client.id}" th:text="${client.firstName} +' ' + ${client.lastName}"></option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="machinistAddSelect">Machinist</label>
                         <select class="form-control mandatory" id="machinistAddSelect">
+                            <option selected disabled></option>
                             <option th:each="machinist : ${machinistList}" th:id="${'addMachinist_' + machinist.id}" th:text="${machinist.firstName} + ' ' + ${machinist.lastName}"></option>
                         </select>
                     </div>
@@ -132,6 +134,7 @@
                     <div class="form-group">
                         <label for="statusAddSelect">Status</label>
                         <select class="form-control mandatory" id="statusAddSelect">
+                            <option selected disabled></option>
                             <option th:each="status : ${statusList}" th:id="${'addStatus_' + status.id}" th:text="${status.status}"></option>
                         </select>
                     </div>

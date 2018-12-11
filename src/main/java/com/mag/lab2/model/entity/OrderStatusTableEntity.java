@@ -1,7 +1,5 @@
 package com.mag.lab2.model.entity;
 
-import com.mag.lab2.model.dto.OrderStatus;
-
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
@@ -56,9 +54,5 @@ public class OrderStatusTableEntity {
     public int hashCode() {
 
         return Objects.hash(id, status);
-    }
-
-    public OrderStatus toModel() {
-        return new OrderStatus(id, status);
     }
 }
