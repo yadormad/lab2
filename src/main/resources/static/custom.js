@@ -11,6 +11,12 @@ function hideButtonsIfNotSelected() {
     }, 100)
 }
 
+var formIsValid = true;
+
+function setValid(isValid) {
+    formIsValid = isValid;
+}
+
 $(document).ready(function () {
     var $mandatoryField = $(".mandatory");
     $mandatoryField.each(function () {
@@ -37,15 +43,20 @@ function submitDelete() {
 }
 
 function validateForms() {
-    if($("#editModal").find(".invalid").length !== 0) {
+    if(formIsValid === false) {
         $("#editSave").attr('disabled', 'disabled');
-    } else {
-        $("#editSave").removeAttr('disabled');
-    }
-    if($("#addModal").find(".invalid").length !== 0) {
         $("#addSave").attr('disabled', 'disabled');
     } else {
-        $("#addSave").removeAttr('disabled');
+        if ($("#editModal").find(".invalid").length !== 0) {
+            $("#editSave").attr('disabled', 'disabled');
+        } else {
+            $("#editSave").removeAttr('disabled');
+        }
+        if ($("#addModal").find(".invalid").length !== 0) {
+            $("#addSave").attr('disabled', 'disabled');
+        } else {
+            $("#addSave").removeAttr('disabled');
+        }
     }
 }
 

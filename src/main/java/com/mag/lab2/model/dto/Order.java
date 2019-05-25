@@ -2,20 +2,33 @@ package com.mag.lab2.model.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
+@XmlRootElement(name = "order")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Order {
+    @XmlElement
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 
+    @XmlElement
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
 
     private Long id;
+    @XmlElement
     private String description;
+    @XmlElement
     private Client client;
+    @XmlElement
     private Machinist machinist;
+    @XmlElement
     private Double cost;
+    @XmlElement
     private OrderStatus status;
 
     public Order(Long id, String description, Date startDate, Date endDate, Double cost) {

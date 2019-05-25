@@ -78,6 +78,9 @@
                         <input type="number" th:id="editMachinistHiddenId" th:field="*{machinist.id}">
                         <input type="number" th:id="editStatusHiddenId" th:field="*{status.id}">
                     </div>
+                    <div id="editDateError" class="alert alert-danger">
+                        Start date must be before End date
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -142,6 +145,9 @@
                         <input type="number" th:id="addClientHiddenId" th:field="*{client.id}">
                         <input type="number" th:id="addMachinistHiddenId" th:field="*{machinist.id}">
                         <input type="number" th:id="addStatusHiddenId" th:field="*{status.id}">
+                    </div>
+                    <div id="addDateError" class="alert alert-danger">
+                        Start date must be before End date
                     </div>
                 </div>
                 <div class="modal-footer">

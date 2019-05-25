@@ -8,7 +8,11 @@ var clientAddPrefix = "addClient_";
 var machinistAddPrefix = "addMachinist_";
 var statusAddPrefix = "addStatus_";
 
-$('#editOrderTable').on('click', '.clickable-row', function(event) {
+$(document).ready(function () {
+   $("#editDateError").hide();
+});
+
+$('#editOrderTable').on('click', '.clickable-row', function() {
     if($(this).hasClass('table-active')){
         $(this).removeClass('table-active');
     } else {
@@ -53,6 +57,46 @@ $("#statusAddSelect").change(function () {
     );
 });
 
+$("#startDateEdit").change(function () {
+    validateEditDates();
+});
+
+
+$("#endDateEdit").change(function () {
+    validateEditDates();
+});
+
+$("#startDateAdd").change(function () {
+    validateAddDates();
+});
+
+
+$("#endDateAdd").change(function () {
+    validateAddDates();
+});
+
+function validateEditDates() {
+    if($("#startDateEdit").val() > $("#endDateEdit").val()) {
+        $("#editDateError").show();
+        setValid(false)
+    } else {
+        $("#editDateError").hide();
+        setValid(true)
+    }
+    validateForms()
+}
+
+function validateAddDates() {
+    if($("#startDateAdd").val() > $("#endDateAdd").val()) {
+        $("#addDateError").show();
+        setValid(false)
+    } else {
+        $("#addDateError").hide();
+        setValid(true)
+    }
+    validateForms()
+}
+
 function setOrderFields() {
     var activeRow = $(".table-active");
     var clientId = activeRow.children()[1].id.replace(clientTablePrefix, "");
@@ -76,5 +120,6 @@ function setOrderFields() {
     $(".mandatory").each(function () {
         validateMandatory(this);
     });
+    validateEditDates()
 }
 

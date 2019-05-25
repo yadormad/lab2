@@ -1,13 +1,24 @@
 package com.mag.lab2.model.dto;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.HashSet;
 import java.util.Set;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Client {
+    @XmlElement
     private Long id;
+    @XmlElement
     private String firstName;
+    @XmlElement
     private String lastName;
+    @XmlElement
     private String fatherName;
+    @XmlElement
     private String phoneNumber;
     private Set<Order> clientOrders;
 
