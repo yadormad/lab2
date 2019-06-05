@@ -13,11 +13,13 @@ import com.mag.lab2.service.converter.Converter;
 import com.mag.lab2.service.converter.impl.OrderJPAConverterImpl;
 import com.mag.lab2.service.exception.DateOrderException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Primary
 @Service
 public class OrderServiceImpl implements OrderService {
 
@@ -68,5 +70,10 @@ public class OrderServiceImpl implements OrderService {
             orderStatuses.add(new OrderStatus(orderStatusTableEntity.getId(), orderStatusTableEntity.getStatus()));
         }
         return orderStatuses;
+    }
+
+    @Override
+    public Order getOrderById(long id) {
+        return orderConverter.toDto(orderRepository.getOne(id));
     }
 }

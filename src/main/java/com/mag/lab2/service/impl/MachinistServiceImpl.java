@@ -7,11 +7,13 @@ import com.mag.lab2.service.MachinistService;
 import com.mag.lab2.service.converter.Converter;
 import com.mag.lab2.service.converter.impl.MachinistJPAConverterImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Primary
 @Service
 public class MachinistServiceImpl implements MachinistService {
 
@@ -23,7 +25,7 @@ public class MachinistServiceImpl implements MachinistService {
         this.machinistRepository = machinistRepository;
         this.machinistConverter = new MachinistJPAConverterImpl(machinistRepository);
     }
-    
+
     @Override
     public Machinist addMachinist(Machinist machinist) {
         MachinistTableEntity machinistEntity = machinistConverter.toEntity(machinist);
@@ -49,5 +51,10 @@ public class MachinistServiceImpl implements MachinistService {
             allMachinists.add(machinistConverter.toDto(machinistEntity));
         }
         return allMachinists;
+    }
+
+    @Override
+    public Machinist getMachinistById(long id) {
+        return machinistConverter.toDto(machinistRepository.getOne(id));
     }
 }

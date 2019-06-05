@@ -9,4 +9,5 @@ public interface MachinistService {
     void delete(long id);
     Machinist editMachinist(Machinist machinist);
     List<Machinist> getAll();
+    Machinist getMachinistById(long id);
 }

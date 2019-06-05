@@ -7,12 +7,14 @@ import com.mag.lab2.service.ClientService;
 import com.mag.lab2.service.converter.Converter;
 import com.mag.lab2.service.converter.impl.ClientJPAConverterImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Primary
+@Service("service")
 public class ClientServiceImpl implements ClientService {
 
     private final ClientRepository clientRepository;
@@ -49,6 +51,11 @@ public class ClientServiceImpl implements ClientService {
             allClients.add(clientConverter.toDto(clientEntity));
         }
         return allClients;
+    }
+
+    @Override
+    public Client getClientById(long id) {
+        return clientConverter.toDto(clientRepository.getOne(id));
     }
 
 

@@ -6,6 +6,7 @@ import com.mag.lab2.service.MachinistService;
 import com.mag.lab2.service.OrderService;
 import com.mag.lab2.service.exception.DateOrderException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class OrderController {
     private final MachinistService machinistService;
 
     @Autowired
-    public OrderController(OrderService orderService, ClientService clientService, MachinistService machinistService) {
+    public OrderController(@Qualifier("orderLogger") OrderService orderService, ClientService clientService, MachinistService machinistService) {
         this.orderService = orderService;
         this.clientService = clientService;
         this.machinistService = machinistService;

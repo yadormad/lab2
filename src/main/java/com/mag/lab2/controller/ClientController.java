@@ -3,6 +3,7 @@ package com.mag.lab2.controller;
 import com.mag.lab2.model.dto.Client;
 import com.mag.lab2.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ public class ClientController {
     private final ClientService clientService;
 
     @Autowired
-    public ClientController(ClientService clientService) {
+    public ClientController(@Qualifier("clientLogger") ClientService clientService) {
         this.clientService = clientService;
     }
 

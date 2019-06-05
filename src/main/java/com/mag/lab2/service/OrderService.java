@@ -12,4 +12,5 @@ public interface OrderService {
     Order editOrder(Order order) throws DateOrderException;
     List<Order> getAll();
     List<OrderStatus> getAllStatuses();
+    Order getOrderById(long id);
 }

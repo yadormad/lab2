@@ -3,6 +3,7 @@ package com.mag.lab2.controller;
 import com.mag.lab2.model.dto.Machinist;
 import com.mag.lab2.service.MachinistService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ public class MachinistController {
     private final MachinistService machinistService;
 
     @Autowired
-    public MachinistController(MachinistService machinistService) {
+    public MachinistController(@Qualifier("machinistLogger") MachinistService machinistService) {
         this.machinistService = machinistService;
     }
 
