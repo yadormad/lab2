@@ -90,4 +90,16 @@ public class Machinist {
     public void setMachinistOrders(Set<Order> machinistOrders) {
         this.machinistOrders = machinistOrders;
     }
+
+    @Override
+    public String toString() {
+        return "Machinist{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", fatherName='" + fatherName + '\'' +
+                ", valueCost=" + valueCost +
+                ", machinistOrders=" + machinistOrders +
+                '}';
+    }
 }

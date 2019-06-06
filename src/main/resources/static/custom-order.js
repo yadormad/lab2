@@ -21,6 +21,12 @@ $('#editOrderTable').on('click', '.clickable-row', function() {
     }
 });
 
+function setSelectValues(clientId, machinistId, statusId) {
+    $("#editClientHiddenId").val(clientId);
+    $("#editMachinistHiddenId").val(machinistId);
+    $("#editStatusHiddenId").val(statusId);
+}
+
 $("#clientEditSelect").change(function () {
     $("#editClientHiddenId").val(
         $(this).children(":selected").attr("id").replace(clientEditPrefix, "")
@@ -117,6 +123,7 @@ function setOrderFields() {
     $("#statusEditSelect").val(
         $("#" + statusEditPrefix + statusId).val()
     );
+    setSelectValues(clientId, machinistId, statusId);
     $(".mandatory").each(function () {
         validateMandatory(this);
     });

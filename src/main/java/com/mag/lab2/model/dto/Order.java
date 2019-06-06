@@ -115,4 +115,18 @@ public class Order {
     public void setStatus(OrderStatus status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", id=" + id +
+                ", description='" + description + '\'' +
+                ", client=" + client.toString() +
+                ", machinist=" + machinist.toString() +
+                ", cost=" + cost +
+                ", status=" + status +
+                '}';
+    }
 }

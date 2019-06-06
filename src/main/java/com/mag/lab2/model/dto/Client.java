@@ -88,4 +88,16 @@ public class Client {
     public void setClientOrders(Set<Order> clientOrders) {
         this.clientOrders = clientOrders;
     }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", fatherName='" + fatherName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", clientOrders=" + clientOrders +
+                '}';
+    }
 }
